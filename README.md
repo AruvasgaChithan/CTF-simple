@@ -1,4 +1,4 @@
-# 🕵️‍♂️ Vulnerable Web CTF — Docker Edition
+# 🕵️‍♂ Vulnerable Web CTF — Docker Edition
 
 A collection of intentionally vulnerable web challenges for practicing ethical hacking and penetration testing skills.  
 **Disclaimer:** This project is for **educational purposes only**. Do not expose it to the public internet.
@@ -26,7 +26,4 @@ docker run -p 80:80 vuln_web
 Access the CTF:
 Open your browser and go to:
 http://localhost:8080
-arduino
-Copy
-Edit
-http://localhost
+
