@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+{% block content %}
+  <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
+    <h2 class="m-0">Challenges</h2>
+    <div class="d-flex gap-2">
+      <input id="search" class="form-control searchbar" placeholder="Search challenges…">
+      <select id="filter" class="form-select searchbar">
+        <option value="all">All Categories</option>
+        {% for cat in challenges|map(attribute='category')|unique %}
+        <option value="{{ cat }}">{{ cat }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+
+  <div id="grid" class="row g-3">
+    {% for c in challenges %}
+    <div class="col-12 col-sm-6 col-lg-4 chal-col" data-name="{{ c.name|lower }}" data-cat="{{ c.category }}">
+      <div class="card-ctf p-3 h-100 {% if c.solved %}solved{% endif %}">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <span class="tag">{{ c.category }}</span>
+          <span class="tag">{{ c.points }} pts</span>
+        </div>
+        <h5 class="mb-2">{{ c.name }}</h5>
+        <p class="text-muted small mb-3">Solve this challenge to capture the flag.</p>
+        <a class="btn btn-ctf w-100" href="{{ url_for(c.route) }}">Open</a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <script>
+    const search = document.getElementById('search');
+    const filter = document.getElementById('filter');
+    const items  = [...document.querySelectorAll('.chal-col')];
+
+    function apply() {
+      const q = (search.value || '').toLowerCase();
+      const cat = filter.value;
+      items.forEach(it => {
+        const matchText = it.dataset.name.includes(q);
+        const matchCat  = (cat === 'all') || (it.dataset.cat === cat);
+        it.style.display = (matchText && matchCat) ? '' : 'none';
+      });
+    }
+    search.addEventListener('input', apply);
+    filter.addEventListener('change', apply);
+  </script>
+{% endblock %}

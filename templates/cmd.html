@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="challenge-container">
+    <h2>Command Injection</h2>
+    <p>This page takes a server IP address and pings it. Can you execute arbitrary commands on the server and read the flag?</p>
+
+    <form method="POST" action="">
+        <label>Host:</label>
+        <input type="text" name="host" placeholder="127.0.0.1">
+        <button type="submit">Ping</button>
+    </form>
+
+    {% if output %}
+        <h3>Ping Output:</h3>
+        <pre>{{ output }}</pre>
+    {% endif %}
+
+    {% if flag %}
+        <div class="flag-box">{{ flag }}</div>
+        <form method="POST" action="{{ url_for('submit_flag', challenge_id='cmd') }}">
+            <input type="text" name="flag" placeholder="Submit flag here">
+            <button type="submit">Submit</button>
+        </form>
+    {% endif %}
+</div>
+{% endblock %}
