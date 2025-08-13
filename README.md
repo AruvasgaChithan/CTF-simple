@@ -15,8 +15,18 @@ A collection of intentionally vulnerable web challenges for practicing ethical h
 ### **Build the Docker Image**
 ```bash
 # Clone the repository
-git clone https://github.com/<your-repo>/vuln_web.git
+git clone https://github.com/AruvasgaChithan/CTF-simple.git
 cd vuln_web
 
 # Build the Docker image (no cache)
 docker build --no-cache -t vuln_web .
+
+Run the CTF Container
+docker run -p 80:80 vuln_web
+Access the CTF:
+Open your browser and go to:
+http://localhost:8080
+arduino
+Copy
+Edit
+http://localhost
